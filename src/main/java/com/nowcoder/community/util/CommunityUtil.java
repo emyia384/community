@@ -2,7 +2,6 @@ package com.nowcoder.community.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.DigestUtils;
-
 import java.util.UUID;
 
 public class CommunityUtil {

@@ -13,6 +13,7 @@ public class KaptchaConfig {
 
     @Bean
     public Producer kaptchaProducer() {
+
         Properties properties = new Properties();
         properties.setProperty("kaptcha.image.width", "100");
         properties.setProperty("kaptcha.image.height", "40");
