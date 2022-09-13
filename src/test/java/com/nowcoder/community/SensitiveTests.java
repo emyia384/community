@@ -25,6 +25,10 @@ public class SensitiveTests {
         text = sensitiveFilter.filter(text);
         System.out.println(text);
 
+        text = "☆f☆a☆b☆c☆";
+        text = sensitiveFilter.filter(text);
+        System.out.println(text);
+
         System.out.println(sensitiveFilter.filter("123"));
         System.out.println(sensitiveFilter.filter("123").length());
     }

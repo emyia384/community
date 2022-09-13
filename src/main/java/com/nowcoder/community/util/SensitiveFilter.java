@@ -49,7 +49,7 @@ public class SensitiveFilter {
             char c = keyword.charAt(i);
             TrieNode subNode = tempNode.getSubNode(c);
 
-            if (subNode == null) {
+                if (subNode == null) {
                 // 初始化子节点
                 subNode = new TrieNode();
                 tempNode.addSubNode(c, subNode);
@@ -84,8 +84,18 @@ public class SensitiveFilter {
         int position = 0;
         // 结果
         StringBuilder sb = new StringBuilder();
-
-        while (position < text.length()) {
+        StringBuilder sb2=new StringBuilder();
+        int len=0;
+        for(int i=text.length()-1;i>=0;i--){
+            if(!isSymbol(text.charAt(i))){
+                break;
+            }else {
+                sb2.append(text.charAt(i));
+                len++;
+            }
+        }
+        text=text.substring(0,text.length()-len);
+        while (begin < text.length()) {
             char c = text.charAt(position);
 
             // 跳过符号
@@ -106,7 +116,7 @@ public class SensitiveFilter {
                 // 以begin开头的字符串不是敏感词
                 sb.append(text.charAt(begin));
                 // 进入下一个位置
-                position = ++begin;
+                position = ++begin; 
                 // 重新指向根节点
                 tempNode = rootNode;
             } else if (tempNode.isKeywordEnd()) {
@@ -118,13 +128,20 @@ public class SensitiveFilter {
                 tempNode = rootNode;
             } else {
                 // 检查下一个字符
-                position++;
+                if(position<text.length()-1) {
+                    position++;
+                }else {
+                    tempNode=rootNode;
+                    sb.append(text.charAt(begin));
+                    position=++begin;
+//                    position=begin;
+                }
             }
         }
 
         // 将最后一批字符计入结果
         sb.append(text.substring(begin));
-
+        sb.append(sb2.reverse());
         return sb.toString();
     }
 

@@ -26,7 +26,6 @@ public class LikeService {
 
                 boolean isMember = redisTemplate.opsForSet().isMember(entityLikeKey, userId);
                 operations.multi();
-
                 if (isMember) {
                     redisTemplate.opsForSet().remove(entityLikeKey, userId);
                     operations.opsForValue().decrement(userLikeKey);
